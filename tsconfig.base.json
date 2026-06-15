@@ -1,0 +1,23 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "paths": {
+      "@lucidea/types": ["./libs/shared/types/src/index.ts"],
+      "@lucidea/database": ["./libs/core/database/src/index.ts"],
+      "@lucidea/repositories": ["./libs/backend/repositories/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

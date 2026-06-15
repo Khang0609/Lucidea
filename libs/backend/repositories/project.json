@@ -1,0 +1,21 @@
+{
+  "name": "repositories",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/backend/repositories/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/backend/repositories",
+        "main": "libs/backend/repositories/src/index.ts",
+        "tsConfig": "libs/backend/repositories/tsconfig.lib.json",
+        "assets": ["libs/backend/repositories/*.md"],
+        "format": ["cjs"],
+        "generatePackageJson": true
+      }
+    }
+  }
+}
