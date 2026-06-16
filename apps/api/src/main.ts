@@ -5,10 +5,16 @@
 
 import express from 'express';
 import * as path from 'path';
+import authRoutes from './routes/auth.routes';
 
 const app = express();
 
+// Enable JSON parser for requests
+app.use(express.json());
+
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
+
+app.use('/api/auth', authRoutes);
 
 app.get('/api', (req, res) => {
   res.send({ message: 'Welcome to api!' });
