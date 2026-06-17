@@ -1,0 +1,19 @@
+# Dependencies
+node_modules
+npm-debug.log
+
+# Build outputs and cache directories
+.nx
+.next
+dist
+tmp
+.swc
+
+# Version control
+.git
+.gitignore
+.github
+.vscode
+
+# Next.js local environment variables
+.env*.local

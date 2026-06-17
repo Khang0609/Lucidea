@@ -1,0 +1,55 @@
+services:
+  # Backend API service
+  api:
+    container_name: lucidea-api
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+      target: development
+    ports:
+      - '3333:3333'
+    environment:
+      - PORT=3333
+      - NODE_ENV=development
+      - JWT_SECRET=supersecretkeychangeinproduction
+    # Docker Compose Watch configuration
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/api
+          target: /app/apps/api
+        - action: sync
+          path: ./libs
+          target: /app/libs
+    volumes:
+      - ./apps/api/database.json:/app/apps/api/database.json
+    restart: always
+
+  # Frontend Web application service
+  web:
+    container_name: lucidea-web
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      target: development
+    ports:
+      - '4200:4200'
+    environment:
+      - PORT=4200
+      - NODE_ENV=development
+      - BACKEND_URL=http://api:3333
+    # Docker Compose Watch configuration
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/web
+          target: /app/apps/web
+          ignore:
+            - .next/
+            - node_modules/
+        - action: sync
+          path: ./libs
+          target: /app/libs
+    depends_on:
+      - api
+    restart: always

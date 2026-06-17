@@ -16,7 +16,9 @@
     "paths": {
       "@lucidea/types": ["./libs/shared/types/src/index.ts"],
       "@lucidea/database": ["./libs/core/database/src/index.ts"],
-      "@lucidea/repositories": ["./libs/backend/repositories/src/index.ts"]
+      "@lucidea/repositories": ["./libs/backend/repositories/src/index.ts"],
+      "@lucidea/auth": ["./libs/shared/auth/src/index.ts"],
+      "@lucidea/ui": ["./libs/shared/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

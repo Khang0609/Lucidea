@@ -10,14 +10,14 @@ WORKDIR /app
 FROM base AS development
 
 COPY package*.json ./
-RUN npm install
+RUN rm -f package-lock.json && npm install
 
 COPY . .
 
 EXPOSE 3333
 
 # Bind to 0.0.0.0 to allow incoming connections from the host OS
-CMD ["npx", "nx", "serve", "api", "--host", "0.0.0.0", "--port", "3333"]
+CMD ["npx", "nx", "serve", "api", "--host", "0.0.0.0"]
 
 # 3. Build Runner (compiles typescript, copies workspace libs, and builds the API)
 FROM base AS build-runner

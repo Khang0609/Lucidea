@@ -20,10 +20,16 @@ export const AccountSchema = z.object({
     .regex(/^[a-zA-Z0-9_]+$/, {
       message: 'Username can only contain alphanumeric characters and underscores',
     }),
-  email: z.email({ message: 'Invalid email address' }),
+  email: z
+    .email({ message: 'Invalid email address' })
+    .optional()
+    .nullable(),
   password: z
     .string()
-    .regex(argon2HashRegex, { message: 'Password must be a valid Argon2 hash' }),
+    .regex(argon2HashRegex, { message: 'Password must be a valid Argon2 hash' })
+    .optional()
+    .nullable(),
+  isAnonymous: z.boolean().default(false),
 });
 
 /**
@@ -34,7 +40,15 @@ export type Account = z.infer<typeof AccountSchema>;
 /**
  * Zod schema for creating an Account (takes plain text password and validates it).
  */
-export const CreateAccountSchema = AccountSchema.extend({
+export const CreateAccountSchema = z.object({
+  username: z
+    .string()
+    .min(3, { message: 'Username must be at least 3 characters long' })
+    .max(30, { message: 'Username cannot exceed 30 characters' })
+    .regex(/^[a-zA-Z0-9_]+$/, {
+      message: 'Username can only contain alphanumeric characters and underscores',
+    }),
+  email: z.email({ message: 'Invalid email address' }),
   password: z
     .string()
     .min(8, { message: 'Password must be at least 8 characters long' })
@@ -42,6 +56,7 @@ export const CreateAccountSchema = AccountSchema.extend({
     .regex(/[a-z]/, { message: 'Password must contain at least one lowercase letter' })
     .regex(/[0-9]/, { message: 'Password must contain at least one number' })
     .regex(/[^A-Za-z0-9]/, { message: 'Password must contain at least one special character' }),
+  migrateAnonData: z.boolean().optional(),
 });
 
 /**

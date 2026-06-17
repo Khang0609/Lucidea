@@ -9,6 +9,12 @@ module.exports = {
       devtoolModuleFilenameTemplate: '[absolute-resource-path]',
     }),
   },
+  ...(process.env.NODE_ENV !== 'production' && {
+    watchOptions: {
+      poll: 1000,
+      ignored: /node_modules/,
+    },
+  }),
   plugins: [
     new NxAppWebpackPlugin({
       target: 'node',
@@ -23,3 +29,4 @@ module.exports = {
     }),
   ],
 };
+

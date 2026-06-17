@@ -14,6 +14,7 @@ describe('InMemoryAccountRepository', () => {
     username: 'test_user',
     email: 'test@example.com',
     password: '$argon2id$v=19$m=65536,t=3,p=4$c29tZXNhbHQ$c29tZWhhc2g',
+    isAnonymous: false,
   };
 
   it('should store and retrieve an account by email', async () => {

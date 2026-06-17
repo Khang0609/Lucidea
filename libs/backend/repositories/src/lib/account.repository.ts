@@ -8,6 +8,7 @@ export interface AccountRepository {
   findByEmail(email: string): Promise<Account | null>;
   findByUsername(username: string): Promise<Account | null>;
   create(account: Account): Promise<Account>;
+  delete(username: string): Promise<void>;
 }
 
 /**
@@ -16,7 +17,7 @@ export interface AccountRepository {
 export class InMemoryAccountRepository implements AccountRepository {
   async findByEmail(email: string): Promise<Account | null> {
     for (const account of db.getAccounts().values()) {
-      if (account.email.toLowerCase() === email.toLowerCase()) {
+      if (account.email && account.email.toLowerCase() === email.toLowerCase()) {
         return account;
       }
     }
@@ -36,5 +37,10 @@ export class InMemoryAccountRepository implements AccountRepository {
     const key = account.username.toLowerCase();
     db.getAccounts().set(key, account);
     return account;
+  }
+
+  async delete(username: string): Promise<void> {
+    const key = username.toLowerCase();
+    db.getAccounts().delete(key);
   }
 }

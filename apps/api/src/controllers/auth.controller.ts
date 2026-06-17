@@ -30,7 +30,27 @@ export class AuthController {
         });
       }
 
-      const result = await this.authService.register(parseResult.data);
+      const currentAnonUsername = req.user?.isAnonymous ? req.user.username : undefined;
+      const migrateAnonData = !!parseResult.data.migrateAnonData;
+
+      const result = await this.authService.register(
+        parseResult.data,
+        currentAnonUsername,
+        migrateAnonData
+      );
+      return res.status(201).json(result);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'An unknown error occurred';
+      return res.status(400).json({ message });
+    }
+  };
+
+  /**
+   * Logs in a guest anonymously.
+   */
+  anonymousLogin = async (req: Request, res: Response) => {
+    try {
+      const result = await this.authService.registerAnonymous();
       return res.status(201).json(result);
     } catch (error) {
       const message = error instanceof Error ? error.message : 'An unknown error occurred';
