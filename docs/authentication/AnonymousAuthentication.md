@@ -2,7 +2,7 @@
 
 This document describes the design, architecture, and API endpoints for the Anonymous Authentication (Guest Sessions) and optional Account Migration system.
 
-## Overview
+## Overview.
 
 The system allows users to access shopping features (managing their shopping cart) without providing personal credentials like email or password. They can later sign up (register a normal account) and choose whether to keep their anonymous cart data or start fresh.
 
