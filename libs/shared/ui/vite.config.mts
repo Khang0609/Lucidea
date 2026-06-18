@@ -53,6 +53,7 @@ export default defineConfig(() => ({
     environment: 'jsdom',
     include: ['{src,tests}/**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     reporters: ['default'],
+    passWithNoTests: true,
     coverage: {
       reportsDirectory: '../../../coverage/libs/shared/ui',
       provider: 'v8' as const,
