@@ -14,7 +14,10 @@ module.exports = {
   content: [
     './{src,pages,components,app}/**/*.{ts,tsx,js,jsx,html}',
     '!./{src,pages,components,app}/**/*.{stories,spec}.{ts,tsx,js,jsx,html}',
-    //     ...createGlobPatternsForDependencies(__dirname)
+    '../../libs/shared/auth/src/**/*.{ts,tsx,js,jsx,html}',
+    '!../../libs/shared/auth/src/**/*.{stories,spec}.{ts,tsx,js,jsx,html}',
+    '../../libs/shared/ui/src/**/*.{ts,tsx,js,jsx,html}',
+    '!../../libs/shared/ui/src/**/*.{stories,spec}.{ts,tsx,js,jsx,html}',
   ],
   theme: {
     extend: {},
